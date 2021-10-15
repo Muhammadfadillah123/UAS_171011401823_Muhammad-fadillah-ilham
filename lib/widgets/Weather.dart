@@ -10,7 +10,7 @@ class Weather extends StatelessWidget {
 
 
   Weather({Key key, @required this.weather}) : super(key: key);
- int _toFahrenheit(double celsius) => ((celsius * 9 / 5) + 32).round();
+ int _toFahrenheit(double celsius) => ((celsius - 273.15)).round();
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -19,7 +19,7 @@ class Weather extends StatelessWidget {
         Text(weather.main, style: new TextStyle(color: Colors.white, fontSize: 32.0)),
         
         Image.network('https://openweathermap.org/img/w/${weather.icon}.png'),
-        Text('${weather.temp.toString()}°F',  style: new TextStyle(color: Colors.white, fontSize: 24.0)),
+        Text('${_toFahrenheit(weather.temp).toString()}°C',  style: new TextStyle(color: Colors.white, fontSize: 24.0)),
         Text(new DateFormat.yMMMd().format(weather.date), style: new TextStyle(color: Colors.white)),
         Text(new DateFormat.Hm().format(weather.date), style: new TextStyle(color: Colors.white)),
       ],
